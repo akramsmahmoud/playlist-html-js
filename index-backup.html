@@ -1,0 +1,2381 @@
+
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;400;500&display=swap" rel="stylesheet">
+    <link href="./plugins/videojs/video-js.min.css" rel="stylesheet"/>
+    <link href="./plugins/video-flor/videojs-flor.css" rel="stylesheet"/>
+    <link href="./plugins/video-thumbnail/videojs.thumbnails.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="./plugins//video-seek/videojs-seek-buttons.css">
+
+    <!-- Main styles -->
+    <style>
+
+        :root {
+            --main-text-color: #fff;
+            --natural-text-color: #cfcfcf;
+            --main-background-color: #242526;
+            --natural-background-color: #252d34;
+            --natural-background-color-light: #38444e;
+            --main-element-color: #fff;
+            --natural-element-color: #cfcfcf;
+            --close-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB2ZXJzaW9uPSIxLjEiIGlkPSJMYXllcl8xIiB4PSIwcHgiIHk9IjBweCIgc3R5bGU9ImVuYWJsZS1iYWNrZ3JvdW5kOm5ldyAwIDAgNjAuOTYzIDYwLjg0MjsiIHhtbDpzcGFjZT0icHJlc2VydmUiIHZpZXdCb3g9IjAgMCA2MC45NiA2MC44NCI+CjxwYXRoIHN0eWxlPSJmaWxsOiMyMzFGMjA7IiBkPSJNNTkuNTk1LDUyLjg2MUwzNy4wOTQsMzAuMzU5TDU5LjQ3Myw3Ljk4YzEuODI1LTEuODI2LDEuODI1LTQuNzg2LDAtNi42MTEgIGMtMS44MjYtMS44MjUtNC43ODUtMS44MjUtNi42MTEsMEwzMC40ODMsMjMuNzQ4TDguMTA1LDEuMzY5Yy0xLjgyNi0xLjgyNS00Ljc4NS0xLjgyNS02LjYxMSwwYy0xLjgyNiwxLjgyNi0xLjgyNiw0Ljc4NiwwLDYuNjExICBsMjIuMzc4LDIyLjM3OUwxLjM2OSw1Mi44NjFjLTEuODI2LDEuODI2LTEuODI2LDQuNzg1LDAsNi42MTFjMC45MTMsMC45MTMsMi4xMDksMS4zNjksMy4zMDYsMS4zNjlzMi4zOTMtMC40NTYsMy4zMDYtMS4zNjkgIGwyMi41MDItMjIuNTAybDIyLjUwMSwyMi41MDJjMC45MTMsMC45MTMsMi4xMDksMS4zNjksMy4zMDYsMS4zNjlzMi4zOTMtMC40NTYsMy4zMDYtMS4zNjkgIEM2MS40Miw1Ny42NDcsNjEuNDIsNTQuNjg3LDU5LjU5NSw1Mi44NjF6Ii8+Cjwvc3ZnPg==');
+            --menu-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MC43OCAyMy42NSI+PGRlZnM+PHN0eWxlPi5he2ZpbGw6IzFkMWQxZDtmaWxsLXJ1bGU6ZXZlbm9kZDt9PC9zdHlsZT48L2RlZnM+PHBhdGggY2xhc3M9ImEiIGQ9Ik0xNy4yOCwyMy42NUg0OC44MWEyLDIsMCwwLDAsMC0zLjk0SDE3LjI4YTIsMiwwLDAsMCwwLDMuOTRabTAtOS44Nkg0OC44MWEyLDIsMCwwLDAsMC0zLjk0SDE3LjI4YTIsMiwwLDAsMCwwLDMuOTRaTTE1LjMxLDJhMiwyLDAsMCwwLDIsMkg0OC44MWEyLDIsMCwwLDAsMC0zLjk0SDE3LjI4QTIsMiwwLDAsMCwxNS4zMSwyWiIvPjxwYXRoIGNsYXNzPSJhIiBkPSJNMTAuMzcsMi44MWExLjI1LDEuMjUsMCwwLDAtMS43NywwTC4yOSwxMS4xMmExLDEsMCwwLDAsMCwxLjQxTDguNiwyMC44NGExLjI1LDEuMjUsMCwwLDAsMS43Ny0xLjc3TDMuMTMsMTEuODJsNy4yNS03LjI1QTEuMjUsMS4yNSwwLDAsMCwxMC4zNywyLjgxWiIvPjwvc3ZnPg==');
+            --play-icon: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTFweCIgaGVpZ2h0PSIxNHB4IiB2aWV3Qm94PSIwIDAgMTEgMTQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUyLjUgKDY3NDY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5wbGF5X2Fycm93PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9Ikljb25zIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iUm91bmRlZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTc1My4wMDAwMDAsIC05NTUuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJBViIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAwLjAwMDAwMCwgODUyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgaWQ9Ii1Sb3VuZC0vLUFWLS8tcGxheV9hcnJvdyIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoNjQ2LjAwMDAwMCwgOTguMDAwMDAwKSI+CiAgICAgICAgICAgICAgICAgICAgPGc+CiAgICAgICAgICAgICAgICAgICAgICAgIDxyZWN0IGlkPSJSZWN0YW5nbGUtQ29weS01MCIgeD0iMCIgeT0iMCIgd2lkdGg9IjI0IiBoZWlnaHQ9IjI0Ij48L3JlY3Q+CiAgICAgICAgICAgICAgICAgICAgICAgIDxwYXRoIGQ9Ik03LDYuODIgTDcsMTcuMTggQzcsMTcuOTcgNy44NywxOC40NSA4LjU0LDE4LjAyIEwxNi42OCwxMi44NCBDMTcuMywxMi40NSAxNy4zLDExLjU1IDE2LjY4LDExLjE1IEw4LjU0LDUuOTggQzcuODcsNS41NSA3LDYuMDMgNyw2LjgyIFoiIGlkPSLwn5S5SWNvbi1Db2xvciIgZmlsbD0iIzFEMUQxRCI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+');
+            --pause-icon: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTJweCIgaGVpZ2h0PSIxNHB4IiB2aWV3Qm94PSIwIDAgMTIgMTQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUyLjUgKDY3NDY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5wYXVzZTwvdGl0bGU+CiAgICA8ZGVzYz5DcmVhdGVkIHdpdGggU2tldGNoLjwvZGVzYz4KICAgIDxnIGlkPSJJY29ucyIgc3Ryb2tlPSJub25lIiBzdHJva2Utd2lkdGg9IjEiIGZpbGw9Im5vbmUiIGZpbGwtcnVsZT0iZXZlbm9kZCI+CiAgICAgICAgPGcgaWQ9IlJvdW5kZWQiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC02NTAuMDAwMDAwLCAtOTU1LjAwMDAwMCkiPgogICAgICAgICAgICA8ZyBpZD0iQVYiIHRyYW5zZm9ybT0idHJhbnNsYXRlKDEwMC4wMDAwMDAsIDg1Mi4wMDAwMDApIj4KICAgICAgICAgICAgICAgIDxnIGlkPSItUm91bmQtLy1BVi0vLXBhdXNlIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSg1NDQuMDAwMDAwLCA5OC4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS1Db3B5LTY3IiB4PSIwIiB5PSIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiPjwvcmVjdD4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTgsMTkgQzkuMSwxOSAxMCwxOC4xIDEwLDE3IEwxMCw3IEMxMCw1LjkgOS4xLDUgOCw1IEM2LjksNSA2LDUuOSA2LDcgTDYsMTcgQzYsMTguMSA2LjksMTkgOCwxOSBaIE0xNCw3IEwxNCwxNyBDMTQsMTguMSAxNC45LDE5IDE2LDE5IEMxNy4xLDE5IDE4LDE4LjEgMTgsMTcgTDE4LDcgQzE4LDUuOSAxNy4xLDUgMTYsNSBDMTQuOSw1IDE0LDUuOSAxNCw3IFoiIGlkPSLwn5S5SWNvbi1Db2xvciIgZmlsbD0iIzFEMUQxRCI+PC9wYXRoPgogICAgICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgICAgIDwvZz4KICAgICAgICAgICAgPC9nPgogICAgICAgIDwvZz4KICAgIDwvZz4KPC9zdmc+');
+            --playlist-icon: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4KPHN2ZyB3aWR0aD0iMTVweCIgaGVpZ2h0PSIxNHB4IiB2aWV3Qm94PSIwIDAgMTUgMTQiIHZlcnNpb249IjEuMSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWxuczp4bGluaz0iaHR0cDovL3d3dy53My5vcmcvMTk5OS94bGluayI+CiAgICA8IS0tIEdlbmVyYXRvcjogU2tldGNoIDUyLjUgKDY3NDY5KSAtIGh0dHA6Ly93d3cuYm9oZW1pYW5jb2RpbmcuY29tL3NrZXRjaCAtLT4KICAgIDx0aXRsZT5wbGF5bGlzdF9wbGF5PC90aXRsZT4KICAgIDxkZXNjPkNyZWF0ZWQgd2l0aCBTa2V0Y2guPC9kZXNjPgogICAgPGcgaWQ9Ikljb25zIiBzdHJva2U9Im5vbmUiIHN0cm9rZS13aWR0aD0iMSIgZmlsbD0ibm9uZSIgZmlsbC1ydWxlPSJldmVub2RkIj4KICAgICAgICA8ZyBpZD0iUm91bmRlZCIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTEwNS4wMDAwMDAsIC05OTkuMDAwMDAwKSI+CiAgICAgICAgICAgIDxnIGlkPSJBViIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMTAwLjAwMDAwMCwgODUyLjAwMDAwMCkiPgogICAgICAgICAgICAgICAgPGcgaWQ9Ii1Sb3VuZC0vLUFWLS8tcGxheWxpc3RfcGxheSIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoMC4wMDAwMDAsIDE0Mi4wMDAwMDApIj4KICAgICAgICAgICAgICAgICAgICA8Zz4KICAgICAgICAgICAgICAgICAgICAgICAgPHJlY3QgaWQ9IlJlY3RhbmdsZS1Db3B5LTYwIiB4PSIwIiB5PSIwIiB3aWR0aD0iMjQiIGhlaWdodD0iMjQiPjwvcmVjdD4KICAgICAgICAgICAgICAgICAgICAgICAgPHBhdGggZD0iTTYsOSBMMTYsOSBDMTYuNTUsOSAxNyw5LjQ1IDE3LDEwIEMxNywxMC41NSAxNi41NSwxMSAxNiwxMSBMNiwxMSBDNS40NSwxMSA1LDEwLjU1IDUsMTAgQzUsOS40NSA1LjQ1LDkgNiw5IFogTTYsNSBMMTYsNSBDMTYuNTUsNSAxNyw1LjQ1IDE3LDYgQzE3LDYuNTUgMTYuNTUsNyAxNiw3IEw2LDcgQzUuNDUsNyA1LDYuNTUgNSw2IEM1LDUuNDUgNS40NSw1IDYsNSBaIE02LDEzIEwxMiwxMyBDMTIuNTUsMTMgMTMsMTMuNDUgMTMsMTQgQzEzLDE0LjU1IDEyLjU1LDE1IDEyLDE1IEw2LDE1IEM1LjQ1LDE1IDUsMTQuNTUgNSwxNCBDNSwxMy40NSA1LjQ1LDEzIDYsMTMgWiBNMTUsMTMuODggTDE1LDE4LjExIEMxNSwxOC41IDE1LjQyLDE4Ljc0IDE1Ljc2LDE4LjU0IEwxOS4yOSwxNi40MiBDMTkuNjEsMTYuMjMgMTkuNjEsMTUuNzYgMTkuMjksMTUuNTYgTDE1Ljc2LDEzLjQ0IEMxNS40MiwxMy4yNSAxNSwxMy40OSAxNSwxMy44OCBaIiBpZD0i8J+UuUljb24tQ29sb3IiIGZpbGw9IiMxRDFEMUQiPjwvcGF0aD4KICAgICAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgICAgICA8L2c+CiAgICAgICAgICAgIDwvZz4KICAgICAgICA8L2c+CiAgICA8L2c+Cjwvc3ZnPg==');
+            --next-playlist-icon: url('data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0idXRmLTgiPz4NCjwhLS0gU3ZnIFZlY3RvciBJY29ucyA6IGh0dHA6Ly93d3cub25saW5ld2ViZm9udHMuY29tL2ljb24gLS0+DQo8IURPQ1RZUEUgc3ZnIFBVQkxJQyAiLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4iICJodHRwOi8vd3d3LnczLm9yZy9HcmFwaGljcy9TVkcvMS4xL0RURC9zdmcxMS5kdGQiPg0KPHN2ZyB2ZXJzaW9uPSIxLjEiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiIHg9IjBweCIgeT0iMHB4IiB2aWV3Qm94PSIwIDAgMTAwMCAxMDAwIiBlbmFibGUtYmFja2dyb3VuZD0ibmV3IDAgMCAxMDAwIDEwMDAiIHhtbDpzcGFjZT0icHJlc2VydmUiPg0KPG1ldGFkYXRhPiBTdmcgVmVjdG9yIEljb25zIDogaHR0cDovL3d3dy5vbmxpbmV3ZWJmb250cy5jb20vaWNvbiA8L21ldGFkYXRhPg0KPGc+PHBhdGggZD0iTTgwNyw0NzguMUw0OCw0Mi44Yy04LjEtNC42LTE3LjItNC42LTI1LjMsMEMxNC42LDQ3LjQsMTAsNTUuNCwxMCw2NC42djg3MC44YzAsOS4zLDQuNiwxNy4xLDEyLjcsMjEuOGM4LjEsNC42LDE3LjIsNC42LDI1LjMsMEw4MDcsNTIxLjhjOC4xLTQuNiwxMi43LTEyLjUsMTIuNy0yMS45QzgxOS43LDQ5MC43LDgxNS4xLDQ4Mi44LDgwNyw0NzguMXoiLz48cGF0aCBkPSJNODY1LjgsMzkuM0g5OTB2OTIxLjRIODY1LjhWMzkuM0w4NjUuOCwzOS4zeiIvPjwvZz4NCjwvc3ZnPg==');
+            --change-season-icon: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIGhlaWdodD0iMjQiIHdpZHRoPSIyNCI+PHBhdGggZD0iTTEyIDE1LjY1IDE2LjY3NSAxMWwtMS42LTEuNTVMMTIgMTIuNTI1IDguOTI1IDkuNDUgNy4zMjUgMTFabTAgNi41NXEtMi4xMjUgMC0zLjk4OC0uOC0xLjg2Mi0uOC0zLjIzNy0yLjE3NVEzLjQgMTcuODUgMi42IDE1Ljk4OCAxLjggMTQuMTI1IDEuOCAxMnQuOC0zLjk4OHEuOC0xLjg2MiAyLjE3NS0zLjIzN1E2LjE1IDMuNCA4LjAxMiAyLjYgOS44NzUgMS44IDEyIDEuOHQzLjk4OC44cTEuODYyLjggMy4yMzcgMi4xNzVRMjAuNiA2LjE1IDIxLjQgOC4wMTJxLjggMS44NjMuOCAzLjk4OHQtLjggMy45ODhxLS44IDEuODYyLTIuMTc1IDMuMjM3UTE3Ljg1IDIwLjYgMTUuOTg4IDIxLjRxLTEuODYzLjgtMy45ODguOFptMC0yLjI3NXEzLjMyNSAwIDUuNjI1LTIuM3QyLjMtNS42MjVxMC0zLjMyNS0yLjMtNS42MjVUMTIgNC4wNzVxLTMuMzI1IDAtNS42MjUgMi4zVDQuMDc1IDEycTAgMy4zMjUgMi4zIDUuNjI1dDUuNjI1IDIuM1pNMTIgMTJaIi8+PC9zdmc+');
+            --transition: all .2s ease-out;
+        }
+
+        *,
+        *:before,
+        *:after {
+            box-sizing: border-box;
+            -webkit-font-smoothing: subpixel-antialiased;
+        }
+
+        body {
+            background-color: var(--main-background-color);
+            color: var(--main-text-color);
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            min-height: 100vh;
+            transition: var(--transition);
+        }
+    </style>
+
+    <!-- Playlist -->
+    <style>
+        .playlist {
+            width: 100%;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 20px 100px;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist {
+                padding: 20px;
+            }
+        }
+
+        .playlist--open-modal {
+            pointer-events: none;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist--open-modal {
+                height: 0;
+                overflow: hidden;
+            }
+        }
+
+
+        .playlist__wrapper {
+            width: 100%;
+            min-width: 735px;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__wrapper {
+                width: 100%;
+                min-width: auto;
+            }
+        }
+
+        .playlist__header {
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__header {
+                flex-direction: column;
+            }
+        }
+
+        .playlist__title {
+            font-size: 30px;
+            font-weight: 700;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__title {
+                margin-bottom: 10px;
+            }
+        }
+
+        .playlist__title-text {
+            display: inline;
+        }
+
+        .playlist__title-number {
+            display: inline;
+        }
+
+
+        .playlist__dropdown {
+            width: 220px;
+            margin-left: auto;
+            margin-right: 10px;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__dropdown {
+                width: 100%;
+            }
+        }
+
+        .playlist__item {
+            display: none;
+            background: #444;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__item {
+                border-bottom: none;
+            }
+        }
+
+        .playlist__item--active {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .playlist__series {
+            display: grid;
+            grid-template-areas: 'number preview title duration' 'number preview description description';
+            grid-template-columns: 65px 250px 2fr 1fr;
+            align-items: center;
+            grid-template-rows: 30px 1fr;
+            grid-column-gap: 15px;
+            padding: 20px 5px;
+            width: 50%;
+        }
+        .playlist__series:nth-child(odd){
+            border-right: 20px solid #242526;
+        }
+        .playlist__series--lastWatched{
+            background: #333;
+            position: relative;
+        }
+        .playlist__series--lastWatched .playlist__series-number{
+            display: none;
+        }
+        .playlist__series--lastWatched:after {
+            content: '';
+            width: 30px;
+            height: 30px;
+            background: var(--main-element-color);
+            mask: var(--play-icon);
+            -webkit-mask: var(--play-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            position: absolute;
+            left: 30px;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__series {
+                grid-template-areas: 'number number' 'preview preview' 'title duration' 'description description';
+                grid-template-columns: 3fr 1fr;
+                grid-template-rows: auto;
+                grid-gap: 5px;
+                border-top: none;
+                margin-bottom: 35px;
+                width: 100%;
+            }
+        }
+
+        .playlist__series-number {
+            grid-area: number;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            font-weight: 500;
+            width: 100%;
+            height: 100%;
+        }
+
+        @media (max-width: 1023px) {
+            .playlist__series-number {
+                margin-bottom: 4px;
+            }
+
+            .playlist__series-number:after {
+                content: '';
+                flex-grow: 1;
+                height: 1px;
+                background: var(--main-element-color);
+                margin-left: 10px;
+            }
+        }
+
+        .playlist__series-preview {
+            grid-area: preview;
+            width: 100%;
+            cursor: pointer;
+            margin-bottom: auto;
+        }
+
+        .playlist__series-preview-item {
+            width: 100%;
+            padding-bottom: 60%;
+            position: relative;
+        }
+
+        .playlist__series-preview-item-video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+
+        .playlist__series-preview-item-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 2;
+        }
+
+        .thumbnail__time {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            background-color: rgba(0, 0, 0, .5);
+            z-index: 999;
+            font-size: 11px;
+            padding: 2px;
+            border-radius: 2px;
+            z-index: 99;
+        }
+
+        .playlist__series-title {
+            grid-area: title;
+            font-size: 16px;
+        }
+
+        .playlist__series-duration {
+            grid-area: duration;
+            text-align: right;
+            font-size: 16px;
+        }
+        @media (max-width: 1023px) {
+            .playlist__series-title {
+                margin-top: 20px;
+            }
+
+            .playlist__series-duration {
+                margin-top: 20px;
+            }
+        }
+
+        .playlist__series-description {
+            grid-area: description;
+            font-size: 14px;
+        }
+        
+        .border-gradient {
+            display: flex;
+            justify-content: space-between;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 23px;
+            user-select: none;
+            white-space: nowrap;
+            text-align: center;
+            padding: 0.65rem 1.5rem;
+            border-radius: 5px;
+            text-transform: capitalize;
+            color: #fff;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease-in-out;
+            width: 250px;
+            background: transparent;
+        }
+        .border-gradient #PlayButtonIcon{
+            margin-right: 6px;
+        }
+        /* .border-gradient:hover {
+        color:/*#00ddff*#9dd7e0;
+        
+        }
+
+        .border-gradient-purple {
+        border-image-source: linear-gradient(to left, #0066ff, #00ffff);
+        
+        }
+
+        .border-gradient-purple:hover {
+            border-image-source: linear-gradient(to right, #0066ff, #00ffff);
+        } */
+        @media (max-width: 1023px) {
+            .border-gradient{
+                margin-top: 20px;
+            }
+        }
+
+        .top-progress-bar{
+            width: 100%;
+            position: absolute;
+            bottom: -11px;
+            height: 5px;
+            border-radius: 0;
+        }
+        #bottom-progress-bar{
+            border-radius: 0;
+            height: 5px;
+            display: none;
+        }
+        progress::-webkit-progress-bar {
+        /* style rules */
+        background-color: #9e9e9e;
+        }
+        progress::-webkit-progress-value {
+        /* style rules */
+        background-color: #2463eb;
+        }
+        progress::-moz-progress-bar {
+        /* style rules */
+        background-color: #9e9e9e;
+        }
+
+    </style>
+
+    <!-- Modal player -->
+    <style>
+        .modal-player {
+            position: fixed;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100vh;
+            background: var(--main-background-color);
+            z-index: 110;
+            grid-template-columns: 1fr;
+            display: none;
+        }
+
+        .modal-player--open-playlist {
+            grid-template-columns: 1fr 430px;
+        }
+
+        @media (max-width: 1023px) {
+            .modal-player {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .modal-player--active {
+            display: grid;
+        }
+
+        .modal-player__close {
+            position: fixed;
+            right: 20px;
+            top: 20px;
+            width: 20px;
+            height: 20px;
+            background: var(--main-element-color);
+            cursor: pointer;
+            mask: var(--close-icon);
+            -webkit-mask: var(--close-icon);
+            margin-left: 20px;
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            z-index: 100;
+            display: none;
+        }
+
+        .modal-player__back {
+            position: fixed;
+            left: 20px;
+            top: 40px;
+            width: 24px;
+            height: 24px;
+            background: var(--main-element-color);
+            cursor: pointer;
+            mask: var(--playlist-icon);
+            -webkit-mask: var(--playlist-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            z-index: 100;
+            display: none;
+        }
+
+        @media (max-width: 1023px) {
+            .modal-player__back {
+                display: block;
+            }
+        }
+
+        .modal-player__items {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-player__item {
+            width: 100%;
+            height: 100%;
+            display: none;
+        }
+
+        .modal-player__item--active {
+            display: block;
+        }
+
+        .modal-player__item-video {
+            width: 100%;
+            height: 100%;
+        }
+
+        .modal-player__playlist {
+            display: none;
+            flex-direction: column;
+            height: 100vh;
+            padding-top: 10px;
+        }
+
+        .modal-player--open-playlist .modal-player__playlist {
+            display: flex;
+        }
+
+        @media (max-width: 1023px) {
+            .modal-player__playlist {
+                position: fixed;
+                left: 0;
+                top: 0;
+                width: 100%;
+                transform: translateX(100%);
+                transition: var(--transition);
+                background: var(--main-background-color);
+            }
+
+            .modal-player--open-playlist .modal-player__playlist {
+                transform: translateX(0);
+            }
+        }
+
+        .modal-player__playlist-content {
+            width: 100%;
+            flex-grow: 1;
+            overflow-y: auto;
+        }
+
+        .modal-player__playlist-footer {
+            display: none;
+            width: 100%;
+            padding: 40px 10px 10px;
+        }
+
+        .modal-player__playlist-item {
+            display: none;
+        }
+
+        .modal-player__playlist-item--active {
+            display: block;
+        }
+
+        .modal-player__series {
+            display: grid;
+            grid-template-areas: 'preview title duration' 'preview description description';
+            grid-template-columns: 190px 2fr 1fr;
+            grid-template-rows: 23px 1fr;
+            grid-column-gap: 8px;
+            padding: 20px 0;
+            padding-left: 20px;
+            font-size: 12px;
+            line-height: 14px;
+            align-items: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .modal-player__series:after {
+            content: attr(data-series-number);
+            position: absolute;
+            color: var(--main-text-color);
+            font-size: 12px;
+            z-index: 100;
+            left: 10px;
+            top: 50%;
+            transform: translate(-50%, -50%);
+        }
+
+        .modal-player__series--playing:after {
+            content: '';
+            width: 10px;
+            height: 10px;
+            background: var(--main-element-color);
+            mask: var(--play-icon);
+            -webkit-mask: var(--play-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        .modal-player__series--playing {
+            background:#111;
+        }
+
+        @media (max-width: 1023px) {
+            .modal-player__series:nth-of-type(1) {
+                border-top: none;
+            }
+        }
+
+        /* .modal-player__series:nth-last-of-type(1) {
+            border-bottom: 1px solid var(--main-element-color);
+        } */
+
+        .modal-player__series-preview {
+            grid-area: preview;
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .modal-player__series-preview-item {
+            width: 100%;
+            padding-bottom: 56.25%;
+            position: relative;
+        }
+
+        .modal-player__series-preview-item-video {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 1;
+        }
+
+        .modal-player__series-item-img {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+            z-index: 2;
+        }
+
+        .modal-player__series-title {
+            grid-area: title;
+        }
+
+        .modal-player__series-duration {
+            grid-area: duration;
+            text-align: right;
+        }
+
+        .modal-player__series-description {
+            grid-area: description;
+        }
+
+        .modal-player__playlist-footer-next {
+            margin-bottom: 30px;
+        }
+
+        @media (max-width: 1023px) {
+            .modal-player__playlist-footer-next {
+                margin-bottom: 10px;
+            }
+        }
+
+        .modal-player__playlist-footer-next-button {
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+            top: -1000px;
+            right: -1000px;
+        }
+
+
+        .modal-player__playlist-footer-next-text {
+            text-align: center;
+            font-size: 12px;
+        }
+  
+        .qualityBadge {
+        display: block;
+        position: absolute;
+        bottom: 10;
+        right: 200px;
+        width: 1000px;
+        height: 100px;
+        }
+    
+        .badge {
+            width: 10px;
+            height: 10px;
+            background-color: red;
+            z-index: 100000000000;
+            font-size: 10px;
+            font-weight:bold;
+            position: absolute;
+            line-height: 0px !important;
+            top: 5px;
+            left: 34px;
+            display: none;
+            height: 1rem;
+            width: 1rem;
+            border-radius:1px;
+            align-items: center;
+            justify-content: center;
+            font-family: arial;
+        }
+        .vjs-title{
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            display: inline-block;
+            width: auto;
+            padding: 0 62px;
+        }
+        .vjs-button.next-playlist{
+            width: 3em;
+            padding: 0px 15px;
+        }
+        .video-js .vjs-big-play-button {
+            opacity: 0;
+            /*background-color: transparent !important;*/
+            color: #fff;
+        }
+        @keyframes playButton{
+            0%{
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50%{
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+        @keyframes pauseButton{
+            0%{
+                transform: scale(0.5);
+                opacity: 0;
+            }
+            50%{
+                transform: scale(1);
+                opacity: 0.8;
+            }
+            100%{
+                opacity: 0;
+            }
+        }
+        .vjs-playing.vjs-has-started .vjs-big-play-button .vjs-icon-placeholder:before{
+            content: "\f103";
+        }
+        .vjs-playing.vjs-has-started .vjs-big-play-button {
+            animation: pauseButton 1s ease-in-out 1;
+        }
+        .vjs-paused.vjs-has-started .vjs-big-play-button {
+            animation: playButton 1s ease-in-out 1;
+        }
+        .vjs-setting-menu .vjs-menu-content{
+            min-width: 200px;
+            min-height: 80px;
+        }
+        .vjs-button.close {
+            position: absolute !important;
+            top: 15px;
+            right: 15px;
+            z-index: 10000000000;
+            width: 25px !important;
+            height: 25px !important;
+            color: #fff;
+            font-size: 40px !important;
+            cursor: pointer;
+            display: block;
+            background: var(--main-element-color);
+            cursor: pointer;
+            mask: var(--close-icon);
+            -webkit-mask: var(--close-icon);
+            margin-left: 20px;
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            opacity: 0;
+            transition: opacity .2s ease;
+        }
+        @media (max-width: 1023px) {
+            .vjs-button.close {
+                /*left: 90%;*/
+            }
+        }
+        .video-js.vjs-user-active .vjs-button.close{
+            opacity: 1
+        }
+        .video-js .vjs-play-progress .vjs-time-tooltip{
+            display: none !important;
+        }
+        .video-js .vjs-seek-button{
+            min-height: 60px;
+        }
+        .video-js.vjs-v7 .vjs-seek-button .vjs-icon-placeholder::before{
+            display: inline-block;
+            width: 35px;
+            height: 35px;
+            background-color:rgba(255, 255, 255, .5);
+            transition: all 0.1s ease-in-out;
+        }
+        .video-js.vjs-v7 .vjs-seek-button .vjs-icon-placeholder:hover::before{
+            background-color:rgba(255, 255, 255, 1);
+            width: 50px;
+            height: 50px;
+        }
+        .video-js.vjs-v7 .vjs-seek-button.skip-back .vjs-icon-placeholder::before{
+            content: "";
+            mask: url(plugins/video-seek/replay10.svg);
+            -webkit-mask: url(plugins/video-seek/replay10.svg);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+        }
+        .video-js.vjs-v7 .vjs-seek-button.skip-forward .vjs-icon-placeholder::before{
+            content: "";
+            mask: url(plugins/video-seek/forward30.svg);
+            -webkit-mask: url(plugins/video-seek/forward30.svg);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        a{
+            color:transparent;
+        }
+
+        a:visited{
+            color:#0000ff;
+        }
+        .vjs-playlist {
+            display: none;
+            background: #333;
+            width: 500px;
+            position: absolute;
+            right: 0;
+            height: calc(100% - 55px);
+        }
+        .vjs-fullscreen .vjs-playlist.open{
+            display: block;
+        }
+        .vjs-fullscreen .vjs-playlist.open .modal-player__playlist{
+            display: block !important;
+            height: 100%;
+        }
+    </style>
+
+    <!-- Custom select -->
+    <style>
+
+        .custom-select {
+            width: 100%;
+            height: 46px;
+            position: relative;
+            font-family: inherit;
+            font-size: 0.875rem;
+            font-weight: 500;
+            line-height: 1.25;
+            user-select: none;
+            white-space: nowrap;
+            text-align: center;
+            margin-left: auto;
+            border-radius: 5px;
+            text-transform: capitalize;
+            color: #fff;
+            border: 1px solid #ccc;
+            transition: all 0.3s ease-in-out;
+            background: #242526;
+        }
+
+        .custom-select,
+        .custom-select *,
+        .custom-select *:before,
+        .custom-select *:after {
+            transition: var(--transition);
+        }
+
+        .custom-select:hover {
+            border-color: var(--natural-element-color);
+        }
+
+        .custom-select:focus {
+            border-color: #ccc;
+            outline: none;
+        }
+        .modal-player__season-select{
+            visibility: hidden;
+            opacity: 0;
+            position: absolute;
+        }
+        .modal-player__season-select .custom-select,.modal-player__season-select .custom-select:focus{
+            border-color: transparent;
+        }
+
+        .custom-select select {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            z-index: 102;
+            opacity: 0;
+            display: none;
+            font-size: 16px;
+        }
+
+        @media (max-width: 1023px) {
+            .custom-select select {
+                display: block;
+            }
+        }
+
+        .custom-select--open {
+            border-bottom-left-radius: 0;
+            border-bottom-right-radius: 0;
+            z-index: 101;
+        }
+
+        .custom-select--invert.custom-select--open {
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+            border-bottom-left-radius: 10px;
+            border-bottom-right-radius: 10px;
+        }
+
+        .custom-select__input {
+            width: 100%;
+            height: 100%;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .custom-select__input-name {
+            display: flex;
+            font-size: 16px;
+            padding: 0 12px;
+            height: 100%;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+            border-radius: 10px;
+            color: var(--main-text-color);
+            width: 100%;
+            line-height: 44px;
+            overflow: hidden;
+        }
+
+        .custom-select:hover .custom-select__input-name {
+            color: var(--natural-text-color);
+        }
+
+        .custom-select--selected .custom-select__input-name {
+            background: var(--natural-background-color);
+            color: var(--main-text-color);
+        }
+
+        .custom-select__input-icon {
+            position: absolute;
+            width: 18px;
+            height: 11px;
+            right: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .custom-select--open .custom-select__input-icon {
+            transform: translateY(-50%) rotate(180deg);
+        }
+
+        .custom-select__input-icon:before, .custom-select__input-icon:after {
+            display: block;
+            content: '';
+            position: absolute;
+            width: 72%;
+            height: 2px;
+            background: var(--main-text-color);
+            bottom: 0;
+        }
+
+        .custom-select:hover .custom-select__input-icon:before, .custom-select:hover .custom-select__input-icon:after {
+            background: var(--natural-text-color);
+        }
+
+        .custom-select__input-icon:before {
+            left: 50%;
+            transform: rotate(-45deg);
+            transform-origin: left bottom;
+        }
+
+        .custom-select__input-icon:after {
+            right: 50%;
+            transform: rotate(45deg);
+            transform-origin: right bottom;
+        }
+
+        .custom-select__list {
+            position: absolute;
+            left: -1px;
+            top: 100%;
+            width: calc(100% + 2px);
+            border: 1px solid;
+            background: inherit;
+            border-color: inherit;
+            border-top-color: transparent;
+            transform: scaleY(0);
+            visibility: hidden;
+            opacity: 0;
+            transform-origin: top;
+            max-height: 200px;
+            overflow: auto;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+
+        .custom-select--invert .custom-select__list {
+            transform-origin: bottom;
+            top: auto;
+            bottom: 100%;
+            border-bottom-color: transparent;
+            border-top-left-radius: 10px;
+            border-top-right-radius: 10px;
+
+        }
+
+        .custom-select--open .custom-select__list {
+            transform: scaleX(1);
+            visibility: visible;
+            opacity: 1;
+        }
+
+        .custom-select__item {
+            padding: 10px 12px;
+            cursor: pointer;
+            -webkit-touch-callout: none;
+            -webkit-user-select: none;
+            -khtml-user-select: none;
+            -moz-user-select: none;
+            -ms-user-select: none;
+            user-select: none;
+        }
+
+        .custom-select__item:focus, .custom-select__item:hover {
+            background: var(--main-background-color);
+            outline: none;
+        }
+
+        .custom-select__item--selected {
+            background: var(--main-background-color);
+        }
+
+        .vjs-player__season-select{
+            position: absolute;
+            right: 5px;
+            bottom: 0;
+            width: 300px;
+            visibility: hidden;
+            opacity: 0;
+            transition: bottom 0.2s ease-in-out,opacity 0.1s ease-in-out;
+        }
+        .vjs-player__season-select.active{
+            opacity: 1;
+            bottom: 60px;
+            visibility: visible;
+            z-index: 9999999999;
+        }
+        .vjs-player__season-select.toRight{
+            right: 3px;
+        }
+        @media (max-width: 1023px) {
+            .vjs-player__season-select{
+                right: 3px;
+            }
+        }
+
+    </style>
+
+    <!-- Custom scroll -->
+    <style>
+
+        .custom-scroll {
+            padding-right: 4px;
+        }
+
+        .custom-scroll::-webkit-scrollbar-button {
+            background-image: none;
+            background-repeat: no-repeat;
+            width: 10px;
+            height: 0;
+        }
+
+        .custom-scroll::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb {
+            background-color: var(--main-element-color);
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .custom-scroll::-webkit-scrollbar-thumb:hover {
+            background-color: var(--natural-element-color);
+            cursor: pointer;
+        }
+
+        .custom-scroll::-webkit-resizer {
+            background-image: none;
+            background-repeat: no-repeat;
+            width: 10px;
+            height: 0;
+        }
+
+        .custom-scroll::-webkit-scrollbar {
+            width: 10px;
+        }
+        .video-js .vjs-progress-control:hover .vjs-play-progress:after {
+            display:none;
+        }
+        @media (max-width: 1023px) {
+            .custom-scroll{
+                padding-top: 40px;
+            }
+        }
+
+    </style>
+
+    <!-- Video controls buttons -->
+    <style>
+        .loop-button .vjs-icon-placeholder {
+            width: 34px;
+            height: 14px;
+            border-radius: 7px;
+            background: #7f7f7f;
+            position: relative;
+        }
+        .vjs-seek-button {
+            position: relative !important;
+        }
+
+
+        .loop-button .vjs-icon-placeholder:after {
+            display: block;
+            content: '';
+            position: absolute;
+            left: 1px;
+            top: 1px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #fff;
+            transition: var(--transition);
+            mask: var(--pause-icon);
+            -webkit-mask: var(--pause-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        .loop-button .vjs-icon-placeholder:before {
+            display: block;
+            content: '';
+            position: absolute;
+            left: -3px;
+            top: -3px;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: #717171;
+            transition: var(--transition);
+
+        }
+
+        .loop-button--active .vjs-icon-placeholder:before {
+            left: calc(100% - 17px);
+            background: #fff;
+        }
+
+        .loop-button--active .vjs-icon-placeholder:after {
+            background: var(--main-background-color);
+            left: calc(100% - 12px);
+            mask: var(--play-icon);
+            -webkit-mask: var(--play-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+        }
+
+        .toggle-playlist .vjs-icon-placeholder {
+            width: 20px;
+            height: 20px;
+            background: var(--main-element-color);
+            cursor: pointer;
+            mask: var(--playlist-icon);
+            -webkit-mask: var(--playlist-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            z-index: 100;
+        }
+
+        .toggle-playlist--active .vjs-icon-placeholder {
+            background: var(--natural-element-color);
+        }
+
+        .next-playlist .vjs-icon-placeholder {
+            width: 15px;
+            height: 15px;
+            background: var(--main-element-color);
+            cursor: pointer;
+            mask: var(--next-playlist-icon);
+            -webkit-mask: var(--next-playlist-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            z-index: 100;
+        }
+
+        .next-playlist--active .vjs-icon-placeholder {
+            background: var(--natural-element-color);
+        }
+
+        .vjs-progress-control.vjs-control{
+            height:2em;
+        }
+        .change-season .vjs-icon-placeholder {
+            width: 24px;
+            height: 24px;
+            margin-top: -5px;
+            background: var(--main-element-color);
+            cursor: pointer;
+            mask: var(--change-season-icon);
+            -webkit-mask:  var(--change-season-icon);
+            mask-size: contain;
+            mask-position: center;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: contain;
+            -webkit-mask-position: center;
+            -webkit-mask-repeat: no-repeat;
+            z-index: 100;
+        }
+
+    </style>
+
+</head>
+
+<body>
+<div id="boxLab"></div>
+
+<div class="playlist">
+    <div class="playlist__wrapper">
+        <div class="playlist__header">
+            <div class="playlist__title">
+                <div class="playlist__title-text">Watch Season</div>
+                <div class="playlist__title-number">1</div>
+            </div>
+            <div class="playlist__dropdown">
+                <select class="select" data-season-select></select>
+            </div>
+            <button id="PlayButton" style="width: 17rem;" class="mybutton  border-gradient border-gradient-purple"
+                data-toggle="modal" data-target="#homeVideo" data-backdrop="static" data-keyboard="false">
+                <span></span><span><i id="PlayButtonIcon" class="fas fa-play"></i> <span class="traxer">Play Video</span> </span>
+            </button>
+        </div>
+        <div>
+            <div class="item" style="text-align:right;">
+                <canvas style="width: 20rem; margin-bottom: 1rem;display: none;" id="canvasId"></canvas>
+            </div>
+            <progress id="bottom-progress-bar" min="0" max="100" value="33">33% played</progress>
+        </div>
+
+        <div class="playlist__items"></div>
+    </div>
+</div>
+
+<div class="modal-player modal-player--open-playlist">
+
+    <div class="modal-player__back"></div>
+    <div class="modal-player__close"></div>
+
+    <div class="modal-player__items"></div>
+
+    <div class="modal-player__playlist">
+        <div class="modal-player__playlist-content custom-scroll"></div>
+
+        <div class="modal-player__playlist-footer">
+
+            <div class="modal-player__playlist-footer-next">
+                <div class="modal-player__playlist-footer-next-button"></div>
+                <div class="modal-player__playlist-footer-next-text">Season 1 Series 2</div>
+            </div>
+
+            <!-- <div class="modal-player__playlist-footer-select">
+                <select class="select" data-season-select><option value="0">Season 1</option><option value="1">Season 2</option><option value="2">Season 3</option><option value="3">Season 4</option></select>            
+            </div> -->
+        </div>
+
+    </div>
+
+</div>
+
+<script src="./plugins/videojs/video.min.js"></script>
+<!-- <script src="./plugins/videojs/videojs-contrib-hls.min.js"></script> -->
+<script src="./plugins/videojs-persistvolume/videojs.persistvolume.js"></script>
+<script src="./plugins/video-flor/videojs-flor.min.js"></script>
+<script src="./plugins/thumbnails-generator/index.js"></script>
+<script src="./plugins/video-thumbnail/videojs.thumbnail.js"></script>
+<script src="./plugins/video-seek/videojs-seek-buttons.min.js"></script>
+<script src="./source/playlist_data.js"></script>
+<script src="./source/player_data.js"></script>
+<script src="https://kit.fontawesome.com/e1a33f0f5e.js" crossorigin="anonymous"></script>
+<!-- <script src="https://unpkg.com/@popperjs/core@2"></script> -->
+<!-- <script src="https://unpkg.com/tippy.js@6"></script> -->
+<script>
+    //render player series items
+    let html_modal_player_items = `<div class="modal-player__season-select">
+        <select class="select" data-season-select><option>season 1</option>
+        </select>
+    </div>`;
+    const player_data = player_data_source.map((data) => {
+        html_modal_player_items += render_players_items_template(data)
+    })
+
+    document.querySelector('.modal-player__items').innerHTML = html_modal_player_items;
+
+    function render_players_items_template(player_data) {
+        const { season_id, series_id, series_url, series_title } = player_data;
+        let type = '';
+        const str = new String(series_url);
+        if (!str.endsWith(".mp4")) {
+            type = 'type="application/x-mpegURL"';
+        }
+        const playlist_items_template = `<div class="modal-player__item" data-season-index="${season_id}" data-series-index="${series_id}" data-series-title="${series_title}">
+                <video class="video-js vjs-default-skin vjs-big-play-centered modal-player__item-video" controls>
+                    <source src="${series_url}" ${type}>
+                </video>
+            </div>`;
+        return playlist_items_template;
+    }
+</script>
+<script>
+    //render playlist on Landing
+    let html_playlist_landing = "";
+    let html_playlist_select = "";
+    let html_modal_playlist = "";
+    const playlist_landing = playlist_data_source.map((season, key) => {
+        html_playlist_landing += render_playlist_items_template(season, key)
+        html_modal_playlist += render_modal_playlist_items_template(season, key)
+        html_playlist_select += render_playlist_select(season, key)
+    })
+
+    document.querySelector('.playlist__items').innerHTML = html_playlist_landing;
+    document.querySelector('.modal-player__playlist-content').innerHTML = html_modal_playlist;
+    document.querySelector('.playlist__dropdown select').innerHTML = html_playlist_select;
+    document.querySelector('.modal-player__season-select select').innerHTML = html_playlist_select;
+
+    function render_playlist_select(playlist_data, key){
+        const { season_id, season_name, season_videos } = playlist_data;
+        const select_option = `<option value="${season_id}">Season ${key+1}</option>`;
+        return select_option;
+    }
+
+    function render_playlist_items_template(playlist_data, key) {
+        const { season_id, season_name, season_videos } = playlist_data;
+        const playlist_series_list = season_videos.map((series, index) => render_series_template(index, { season_id, ...series }))
+        const active_class = key === 0 ? 'playlist__item--active' : '';
+        const playlist_items_template = `<div class="playlist__item ${active_class}" data-season-index="${key}">${playlist_series_list.join("")}</div>`;
+        return playlist_items_template;
+    }
+    function render_series_template(index, series_data) {
+        const { season_id, video_id, video_name, video_description, video_duration, video_poster, video_url } = series_data;
+        const series_template = `<div class="playlist__series">
+            <div class="playlist__series-number">${index + 1}</div>
+            <div class="playlist__series-preview thumbnail" data-season-index="${season_id}"
+                    data-series-index="${video_id}">
+                <div class="playlist__series-preview-item">
+
+                    <video class="playlist__series-preview-item-video thumbnail__video" muted
+                            playsinline>
+                        <source src="${video_url}">
+                    </video>
+
+                    <img class="playlist__series-preview-item-img thumbnail__img"
+                            src="${video_poster}">
+                            <span class="playlist__series-preview-item-time thumbnail__time">--:--</span>
+                    <progress id='top-progress-bar' class='top-progress-bar' min='0' max='100' value='0'>0%
+                                    played</progress>
+                </div>
+            </div>
+            <div class="playlist__series-title">${video_name}</div>
+            <div class="playlist__series-description">${video_description}</div>
+        </div>`;
+        return series_template;
+    }
+
+    //render modal playlist template
+    function render_modal_playlist_items_template(playlist_data, key) {
+            const { season_id, season_name, season_videos } = playlist_data;
+            const modal_playlist_series_list = season_videos.map((series, index) => render_modal_series_template(index, { season_id, ...series }))
+            const active_class = key === 0 ? 'modal-player__playlist-item--active' : '';
+            const playlist_items_template = `<div class="modal-player__playlist-item ${active_class}" data-season-index="${season_id}">${modal_playlist_series_list.join("")}</div>`;
+            return playlist_items_template;
+    }
+    function render_modal_series_template(index, series_data) {
+        const { season_id, video_id, video_name, video_description, video_duration, video_poster, video_url } = series_data;
+        const series_template = `<div class="modal-player__series" data-season-index="${season_id}" data-series-index="${video_id}" data-series-number="${index+1}">
+                <div class="modal-player__series-preview thumbnail" data-season-index="${season_id}" data-series-index="${video_id}">
+                    <div class="modal-player__series-preview-item">
+
+                        <video class="modal-player__series-preview-item-video thumbnail__video" muted
+                                playsinline>
+                            <source src="${video_url}">
+                        </video>
+                        <span class="modal-player__series-time thumbnail__time">--:--</span>
+                        <progress id='top-progress-bar' class='top-progress-bar' min='0' max='100' value='0'>0% played</progress>
+                        <img class="modal-player__series-item-img thumbnail__img"
+                                src="${video_poster}">
+                    </div>
+                </div>
+                <div class="modal-player__series-title">${video_name}</div>
+                <div class="modal-player__series-description">${video_description}</div>
+            </div>`;
+        return series_template;
+    }
+</script>
+<script>
+    function setQualityLevels(player) {
+        //quality videojs     
+        let cog = player.el().querySelector('button.vjs-setting-button')
+        var qualityLevels = player.qualityLevels();
+        let badge = document.createElement('span')
+
+        badge.classList.add('badge')
+        cog.appendChild(badge)
+
+        // check quality -----------------------------------------------------------
+        qualityLevels.on('change', function () {
+            if (qualityLevels.selectedIndex_ >= 2 && qualityLevels.selectedIndex_ <= 3) {
+                badge.style.display = 'flex'
+                badge.innerText = 'SD'
+                badge.style.width = '1rem'
+            }
+            else if (qualityLevels.selectedIndex_ >= 4 && qualityLevels.selectedIndex_ <= 6) {
+                badge.style.display = 'flex'
+                badge.innerText = 'HD'
+                badge.style.width = '1rem'
+            }
+            else if (qualityLevels.selectedIndex_ >= 6 && qualityLevels.selectedIndex_ <= 8) {
+                badge.style.display = 'flex'
+                badge.innerText = '2k'
+                badge.style.width = '1rem'
+            }
+            else if (qualityLevels.selectedIndex_ >= 9) {
+                badge.style.display = 'flex'
+                badge.style.background = ' #ff0000'
+                badge.style.color = '#ffffff'
+                badge.style.font = '15px'
+                badge.innerText = '4K'
+                badge.style.width = '1rem'
+            }
+            else {
+                badge.style.display = 'none'
+            }
+        });
+    }
+</script>
+<script>
+    const mobileBreakpoint = 1023;
+
+    const $playlist = document.querySelector('.playlist');
+    const playlistOpenModal = 'playlist--open-modal';
+    const $modal = document.querySelector('.modal-player');
+    const modalActiveClass = 'modal-player--active';
+    const $modalClose = document.querySelector('.modal-player__close');
+    const $playlistClose = document.querySelector('.modal-player__back');
+
+
+    const openPlaylistClass = 'modal-player--open-playlist';
+    const videoThumbnails = Array.from(document.querySelectorAll('.thumbnail'));
+    const selects = Array.from(document.querySelectorAll('.select'));
+    const mainSeasonWrappers = Array.from(document.querySelectorAll('.playlist__item'));
+    const modalSeasonWrappers = Array.from(document.querySelectorAll('.modal-player__playlist-item'));
+    const mainSeasonWrapperActiveClass = 'playlist__item--active';
+    const modalSeasonWrapperActiveClass = 'modal-player__playlist-item--active';
+
+    const videoItemClass = 'modal-player__item';
+    const videoItemActiveClass = 'modal-player__item--active';
+    const videoItems = Array.from(document.querySelectorAll(`.${videoItemClass}`));
+    const $titleSeasonNumber = document.querySelector('.playlist__title-number');
+    const $nextButton = document.querySelector('.modal-player__playlist-footer-next-button');
+    const nextButtonDisabledClass = 'modal-player__playlist-footer-next-button--disabled';
+    const $nextText = document.querySelector('.modal-player__playlist-footer-next-text');
+
+    const players = Array.from(document.querySelectorAll('.video-js'));
+    const loopButtonClass = 'loop-button';
+    const loopButtonActiveClass = 'loop-button--active';
+    const togglePlaylistButtonClass = 'toggle-playlist';
+    const togglePlaylistButtonActiveClass = 'toggle-playlist--active';
+    const nextSessonButtonClass = 'next-playlist';
+    const nextSessonButtonDisabledClass = 'next-playlist--disabled';
+
+    const playlistSeriesClass = 'modal-player__series';
+    const playlistSeriesPlayingClass = 'modal-player__series--playing';
+    const playlistSeries = Array.from(document.querySelectorAll(`.${playlistSeriesClass}`));
+
+    let thumbnailFrame = 10;
+
+
+    var canFullscreen = function () {
+        return (
+            !document.fullscreen &&
+            !document.mozFullScreen &&
+            !document.webkitFullscreen &&
+            !document.msFullscreen);
+    }
+
+    //playlist in fullscreen
+    var Component = videojs.getComponent('Component');
+
+    // The videojs.extend function can be used instead of ES6 classes.
+    var PlayListFullscreen = videojs.extend(Component, {
+        constructor: function (player, options) {
+
+            // Equivalent of `super(this, arguments)`
+            Component.apply(this, arguments);
+            this.el().innerHTML = '<div class="modal-player__playlist">' + document.querySelector('.modal-player__playlist').innerHTML + "</div>";
+            
+        },
+
+        createEl: function () {
+            return videojs.dom.createEl('div', {
+                className: 'vjs-playlist'
+            });
+        },
+    });
+
+    var selectSeasonFullscreen = videojs.extend(Component, {
+        constructor: function (player, options) {
+
+            // Equivalent of `super(this, arguments)`
+            Component.apply(this, arguments);
+            this.el().innerHTML +=  document.querySelector('.modal-player__season-select').innerHTML;
+
+        },
+
+        createEl: function () {
+            return videojs.dom.createEl('div', {
+                className: 'vjs-player__season-select'
+            });
+        },
+    });
+
+    const Button = videojs.getComponent('Button');
+
+    let currentSeason = 0;
+    let currentSeries = 0;
+    let loopState = false;
+
+    const loopButton = videojs.extend(Button, {
+        constructor: function () {
+            Button.apply(this, arguments);
+            this.addClass(loopButtonClass);
+        },
+        handleClick: function () {
+            const videoContent = this.player().el().querySelector('video');
+            const $loopButton = this.player().el().querySelector(`.${loopButtonClass}`);
+
+            if ($loopButton.classList.contains(loopButtonActiveClass)) {
+                $loopButton.classList.remove(loopButtonActiveClass);
+                loopState = false;
+            } else {
+                $loopButton.classList.add(loopButtonActiveClass);
+                loopState = true;
+            }
+        }
+    });
+
+    const togglePlaylistButton = videojs.extend(Button, {
+        constructor: function () {
+            Button.apply(this, arguments);
+            this.addClass(togglePlaylistButtonClass);
+        },
+        handleClick: function () {
+            this.player().el().querySelector('.vjs-playlist').innerHTML = "<div class='modal-player__playlist'>" + document.querySelector('.modal-player > .modal-player__playlist').innerHTML + "</div>";
+            const $togglePlaylistButton = this.player().el().querySelector(`.${togglePlaylistButtonClass}`);
+            const $fullscreenPlaylist = this.player().el().querySelector('.vjs-playlist');
+
+            if ($modal.classList.contains(openPlaylistClass)) {
+                $togglePlaylistButton.classList.remove(togglePlaylistButtonActiveClass);
+                $modal.classList.remove(openPlaylistClass);
+                document.querySelector('.vjs-player__season-select').classList.add('toRight')
+            } else {
+                $togglePlaylistButton.classList.add(togglePlaylistButtonActiveClass);
+                $modal.classList.add(openPlaylistClass);
+                document.querySelector('.vjs-player__season-select').classList.remove('toRight')
+            }
+
+
+            if($fullscreenPlaylist.classList.contains('open')){
+                $fullscreenPlaylist.classList.remove('open')
+            }else{
+                $fullscreenPlaylist.classList.add('open')
+            }
+        }
+    });
+
+    const nextSessonButton = videojs.extend(Button, {
+        constructor: function () {
+            Button.apply(this, arguments);
+            this.addClass(nextSessonButtonClass);
+            //document.querySelector('.vjs-remaining-time').remove();
+        },
+        handleClick: function () {
+            playNext();
+        }
+    });
+
+    const closeButton = videojs.extend(Button, {
+        constructor: function () {
+            Button.apply(this, arguments);
+            this.addClass('close');
+            this.innerHTML = "&times;"
+            //document.querySelector('.vjs-remaining-time').remove();
+        },
+        handleClick: function () {
+            videojs.log('Clicked');
+        }
+    });
+
+    const changeSeasonButton = videojs.extend(Button, {
+        constructor: function () {
+            Button.apply(this, arguments);
+            this.addClass('change-season');
+        },
+        handleClick: function () {
+            const classes = this.player().el().querySelector('.vjs-player__season-select').classList;
+            if (classes.contains('active')) {
+                classes.remove('active');
+            } else {
+                classes.add('active');
+            }
+        }
+    });
+
+        
+    videojs.registerComponent('PlayListFullscreen', PlayListFullscreen);
+    videojs.registerComponent('selectSeasonFullscreen', selectSeasonFullscreen);
+    videojs.registerComponent('loopButton', loopButton);
+    videojs.registerComponent('togglePlaylistButton', togglePlaylistButton);
+    videojs.registerComponent('nextSessonButton', nextSessonButton);
+    videojs.registerComponent('closeButton', closeButton);
+    videojs.registerComponent('changeSeasonButton', changeSeasonButton);
+    players.forEach(($player, index) => {
+        const video_title = $player.parentElement.dataset.seriesTitle;
+        const player = videojs($player, {
+            title: video_title !== "undefined" ? video_title : "",
+            controlBar: {
+                pictureInPictureToggle: false
+            }
+        });
+        if (player.currentType() === 'application/x-mpegURL') {
+            var flor = window.flor = player.flor();
+            setQualityLevels(player);
+        }
+        player.seekButtons({
+            forward: 30,
+            back: 10
+        })
+        player.addChild('PlayListFullscreen');
+        player.addChild('selectSeasonFullscreen');
+        player.getChild('controlBar').addChild('loopButton', {}, 9);
+        player.getChild('controlBar').addChild('togglePlaylistButton', {}, 9);
+        player.getChild('controlBar').addChild('changeSeasonButton', {}, 9);
+        player.getChild('controlBar').addChild('nextSessonButton', {}, 1);
+        const closeBtn = player.addChild('closeButton');
+
+        player.on('play', () => {
+            player.on('userinactive', () => {
+                const selectClasses = player.el().querySelector('.vjs-player__season-select').classList;
+                if(!selectClasses.contains('mouseOn')){
+                    selectClasses.remove('active')
+                }
+                
+            })
+        })
+        player.on('pause', () => {
+            player.off('userinactive')
+        })
+
+        closeBtn.el().addEventListener('click', () => {
+            player.pause()
+            $modal.classList.remove(modalActiveClass);
+            $playlist.classList.remove(playlistOpenModal);
+            if (canFullscreen() === false) {
+                document.exitFullscreen()
+            }
+        })
+
+
+        player.on('play', () => {
+            setPlayingClass(+$player.closest(`.${videoItemClass}`).dataset.seasonIndex, +$player.closest(`.${videoItemClass}`).dataset.seriesIndex);
+        });
+
+        player.on('ready', () => {
+            const $togglePlaylistButton = player.el().querySelector(`.${togglePlaylistButtonClass}`);
+
+            if ($modal.classList.contains(openPlaylistClass)) {
+                $togglePlaylistButton.classList.add(togglePlaylistButtonActiveClass);
+            } else {
+                $togglePlaylistButton.classList.remove(togglePlaylistButtonActiveClass);
+            }
+
+            const $seasonSelect = player.el().querySelector('.vjs-player__season-select select');
+            const select = new Select({
+                $select: $seasonSelect,
+            });
+
+            $seasonSelect.addEventListener('change', () => {
+                if (+$seasonSelect.value !== currentSeason) {
+                    changeSeason(+$seasonSelect.value);
+                }
+            });
+
+            player.el().querySelector('.vjs-player__season-select').addEventListener('mouseover', () => {
+                select.checkPosition();
+            });
+
+        });
+
+        player.on('ended', () => {
+            if (loopState) {
+                playNext();
+            }
+        });
+        player.ready(function () {
+            this.persistvolume();
+        });
+    });
+
+
+    class Select {
+
+        /* Example options
+        {
+            selectClass:'select',     // String
+            $select:document.getElementsByClassName(this.selectClass)[0],       // node element
+            customSelectClass:'custom-select',     // String
+        }
+         */
+
+        constructor(options) {
+            this.selectClass = options && options.selectClass ?
+                options.selectClass :
+                'select';
+            this.$select = options && options.$select ?
+                options.$select :
+                document.getElementsByClassName(this.selectClass)[0];
+            this.customSelectClass = options && options.customSelectClass ?
+                options.customSelectClass :
+                'custom-select';
+            this.openClass = options && options.openClass ?
+                options.openClass :
+                this.customSelectClass + '--open';
+            this.selectedClass = options && options.selectedClass ?
+                options.selectedClass :
+                this.customSelectClass + '--selected';
+            this.itemClass = options && options.itemClass ?
+                options.itemClass :
+                this.customSelectClass + '__item';
+            this.selectedItemClass = options && options.selectedItemClass ?
+                options.selectedItemClass :
+                this.itemClass + '--selected';
+            this.disabledItemClass = options && options.disabledItemClass ?
+                options.disabledItemClass :
+                this.itemClass + '--disabled';
+            this.invertPositionClass = options && options.invertPositionClass ?
+                options.invertPositionClass :
+                this.customSelectClass + '--invert';
+            this.$customSelect = document.createElement('div');
+            this.current = null;
+            this.options = Array.from(this.$select.getElementsByTagName('option'));
+            this.changeEvent = new Event('change', {bubbles: true});
+            this.data = this.getSelectData();
+            this.init();
+        }
+
+        init() {
+            this.$select.parentElement.appendChild(this.$customSelect).tabIndex = 0;
+            this.$customSelect.classList.add(this.customSelectClass);
+            this.$customSelect.appendChild(this.$select);
+            this.setHtml();
+            this.setKeyboardManage();
+        }
+
+        getSelectData() {
+            this.options = Array.from(this.$select.getElementsByTagName('option'));
+            let optionsArray = new Map();
+
+            this.options.map((item, index) => {
+                let value = item.hasAttribute('value') ?
+                    item.getAttribute('value') :
+                    item.innerText;
+
+                let selected = false;
+
+                if (item.hasAttribute('selected')) {
+                    this.current = index;
+                    selected = true;
+                }
+
+                const option = {
+                    name: item.innerText,
+                    selected: item.hasAttribute('selected'),
+                    disabled: item.hasAttribute('disabled'),
+                    hidden: item.hasAttribute('hidden'),
+                    index: index
+                };
+
+                optionsArray.set('index' + option.index, option);
+            });
+
+            if (this.current === null) {
+                this.current = optionsArray.get('index' + 0).index;
+            }
+            return optionsArray;
+        }
+
+        setHtml() {
+            const template = `
+            <div data-select-type="button" class="${this.customSelectClass}__input">
+                <div data-select-type="button" class="${this.customSelectClass}__input-name">${this.data.get('index' + this.current).name}</div>
+                <div data-select-type="button" class="${this.customSelectClass}__input-icon"></div>
+            </div>
+            <div data-select-type="button" class="${this.customSelectClass}__list custom-scroll"></div>
+        `;
+
+            this.$customSelect.insertAdjacentHTML('beforeEnd', template);
+
+            this.setListHtml();
+            this.setup();
+            this.checkPosition();
+        }
+
+        setListHtml() {
+            let $list = this.$customSelect.querySelector(`.${this.customSelectClass}__list`);
+            let list = '';
+
+            for (let item of this.data.values()) {
+                if (!item.hidden) {
+                    let classDisabled = '';
+                    let classSelected = '';
+
+                    if (item.selected) {
+                        classSelected = this.selectedItemClass;
+                    }
+
+                    if (item.disabled) {
+                        classDisabled = this.disabledItemClass;
+                    }
+
+                    list += `<div data-select-index="${item.index}" tabindex="0" data-select-type="value" class="${this.customSelectClass}__item ${classSelected} ${classDisabled}">${item.name}</div>`;
+                }
+            }
+
+            $list.innerHTML = '';
+            $list.insertAdjacentHTML('beforeEnd', list);
+        }
+
+        setup() {
+            this.clickHandler = this.clickHandler.bind(this);
+            this.changeHandler = this.changeHandler.bind(this);
+            document.addEventListener('click', this.clickHandler);
+            window.addEventListener('scroll', this.checkPosition);
+            this.$select.addEventListener('change', this.changeHandler);
+            if(document.querySelectorAll('.custom-select__list')[1]){
+                document.querySelectorAll('.custom-select__list')[1].addEventListener('mouseover', () => {
+                    document.querySelector('.vjs-player__season-select').classList.add('mouseOn')
+                });
+                 document.querySelectorAll('.custom-select__list')[1].addEventListener('mouseout', () => {
+                    document.querySelector('.vjs-player__season-select').classList.remove('mouseOn')
+                });
+            }
+            this.$name = this.$customSelect.querySelector('.' + this.customSelectClass + '__input-name');
+            this.$items = this.$customSelect.querySelectorAll('.' + this.customSelectClass + '__item');
+        }
+
+        checkPosition() {
+
+            if (!this.$customSelect) {
+                return;
+            }
+
+            const top = this.$customSelect.getBoundingClientRect().top;
+            const freePlace = window.innerHeight - this.$customSelect.getBoundingClientRect().height - 250;
+
+            if (top > freePlace) {
+                this.$customSelect.classList.add(this.invertPositionClass);
+            } else {
+                this.$customSelect.classList.remove(this.invertPositionClass);
+            }
+        }
+
+        clickHandler(event) {
+            const isSelectClick = (click) => {
+                if (click === this.$customSelect) {
+                    return true;
+                } else if (click.closest('.' + this.customSelectClass) && click.closest('.' + this.customSelectClass) === this.$customSelect) {
+                    return true;
+                } else {
+                    return false;
+                }
+            };
+
+            if (isSelectClick(event.target)) {
+                const type = event.target.dataset.selectType;
+                if (type === 'button') {
+                    this.toggle();
+                } else if (type === 'value') {
+                    if (!event.target.classList.contains(this.disabledItemClass)) {
+                        this.current = event.target.dataset.selectIndex;
+                        this.select(this.current);
+                        this.close();
+                        document.querySelector('.vjs-player__season-select').classList.remove('active');
+                    }
+                }
+            } else {
+                this.close();
+            }
+        }
+
+        changeHandler(event) {
+            this.options = Array.from(this.$select.getElementsByTagName('option'));
+
+            this.options.map((item, index) => {
+                let value;
+
+                if (item.hasAttribute('value')) {
+                    value = item.getAttribute('value');
+                } else {
+                    value = item.innerText;
+                }
+
+                if (value === this.$select.value) {
+                    this.setSelectHtml(index);
+                }
+            });
+
+            if (this.$select.value === 'default') {
+                this.$customSelect.classList.remove(this.selectedClass);
+            } else {
+                this.$customSelect.classList.add(this.selectedClass);
+            }
+        }
+
+        select(index) {
+            this.current = index;
+            this.$select.value = this.options[index].value;
+            this.$select.dispatchEvent(this.changeEvent);
+        }
+
+        setSelectHtml(index) {
+            this.$name.innerText = this.data.get('index' + index).name;
+
+            this.$items.forEach(($item) => {
+                if (parseInt($item.dataset.selectIndex) === index && this.$select.value !== 'default') {
+                    $item.classList.add(this.selectedItemClass);
+                } else {
+                    $item.classList.remove(this.selectedItemClass);
+                }
+            });
+
+            if (this.$select.value === 'default') {
+                this.$customSelect.classList.remove(this.selectedClass);
+            } else {
+                this.$customSelect.classList.add(this.selectedClass);
+            }
+        }
+
+        refresh() {
+            this.data = this.getSelectData();
+            this.setListHtml();
+            this.select(this.current);
+        }
+
+        toggle() {
+            if (this.$customSelect.classList.contains(this.openClass)) {
+                this.close();
+            } else {
+                this.open();
+            }
+        }
+
+        open() {
+            this.$customSelect.classList.add(this.openClass);
+        }
+
+        close() {
+            this.$customSelect.classList.remove(this.openClass);
+        }
+
+        setKeyboardManage() {
+            const down = 'ArrowDown';
+            const up = 'ArrowUp';
+            const space = 'Space';
+            const enter = 'Enter';
+            const escape = 'Escape';
+            const specialKeys = [
+                down,
+                up,
+                space,
+                enter,
+                escape,
+            ];
+
+            this.$customSelect.addEventListener('keydown', event => {
+                const isOpen = this.$customSelect.classList.contains(this.openClass);
+
+                if (specialKeys.indexOf(event.code) !== -1) {
+                    event.preventDefault();
+                    const $list = Array.from(this.$customSelect.querySelectorAll(`.${this.itemClass}`));
+
+                    if (!isOpen && event.code === enter) {
+                        return;
+                    }
+
+                    if (!isOpen) {
+                        if (event.code === space) {
+                            this.open();
+                            return;
+                        }
+
+                        if (event.code === down || event.code === up) {
+                            this.open();
+
+                            if (event.code === down) {
+                                $list[0].focus();
+                            }
+
+                            if (event.code === up) {
+                                $list[$list.length - 1].focus();
+                            }
+
+                            return;
+                        }
+
+                        return;
+                    }
+
+                    if (isOpen) {
+                        const currentIndex = $list.indexOf(document.activeElement);
+
+                        if (event.code === escape) {
+                            this.close();
+                            this.$customSelect.focus();
+                        }
+
+                        if (event.code === down) {
+                            const nextIndex = currentIndex + 1 === $list.length ?
+                                0 :
+                                currentIndex + 1;
+                            $list[nextIndex].focus();
+                        }
+
+                        if (event.code === up) {
+                            const nextIndex = currentIndex - 1 < 0 ?
+                                $list.length - 1 :
+                                currentIndex - 1;
+                            $list[nextIndex].focus();
+                        }
+
+                        if (event.code === space || event.code === enter) {
+                            if (document.activeElement.classList.contains(this.itemClass)) {
+                                this.select(document.activeElement.dataset.selectIndex);
+                                this.close();
+                                this.$customSelect.focus();
+                            }
+                        }
+                    }
+                }
+
+            });
+
+        }
+    }
+
+    function playThumbnail($thumbnail) {
+        const $video = $thumbnail.querySelector('.thumbnail__video');
+        const $img = $thumbnail.querySelector('.thumbnail__img');
+
+        const format = (s) =>  {
+            var m = Math.floor(s / 60);
+            m = (m >= 10) ? m : "0" + m;
+            s = Math.floor(s % 60);
+            s = (s >= 10) ? s : "0" + s;
+            return m + ":" + s;
+        }
+        $video.onloadedmetadata = function () {
+            const $time = $thumbnail.querySelector('.thumbnail__time').innerText = format($video.duration);
+        };
+
+        $thumbnail.addEventListener('mouseenter', () => {
+            $video.play();
+            $img.style.opacity = 0;
+        });
+
+        $thumbnail.addEventListener('mouseleave', () => {
+            $video.pause();
+            $video.currentTime = 0;
+            $img.style.opacity = 1;
+        });
+
+    }
+
+    function changeSeason(season) {
+        currentSeason = season;
+        currentSeries = 0;
+
+        mainSeasonWrappers.forEach(($mainSeasonWrapper) => {
+            if (+$mainSeasonWrapper.dataset.seasonIndex === currentSeason) {
+                $mainSeasonWrapper.classList.add(mainSeasonWrapperActiveClass);
+            } else {
+                $mainSeasonWrapper.classList.remove(mainSeasonWrapperActiveClass);
+            }
+        });
+
+        modalSeasonWrappers.forEach(($modalSeasonWrapper) => {
+            if (+$modalSeasonWrapper.dataset.seasonIndex === currentSeason) {
+                $modalSeasonWrapper.classList.add(modalSeasonWrapperActiveClass);
+            } else {
+                $modalSeasonWrapper.classList.remove(modalSeasonWrapperActiveClass);
+            }
+        });
+
+        videoItems.forEach(($videoItem) => {
+            $videoItem.querySelector('video').pause();
+            //$videoItem.querySelector('video').currentTime = 0;
+
+            if (+$videoItem.dataset.seasonIndex === currentSeason && +$videoItem.dataset.seriesIndex === 0) {
+                $videoItem.classList.add(videoItemActiveClass);
+            } else {
+                $videoItem.classList.remove(videoItemActiveClass);
+            }
+        });
+
+        selects.forEach(($select) => {
+            $select.value = currentSeason;
+            $select.dispatchEvent(new Event('change'));
+        });
+
+        $titleSeasonNumber.innerText = currentSeason + 1;
+
+        setNextButton();
+    }
+
+    function calcNext() {
+        let targetSeason = currentSeason;
+        let isTargetSeason = false;
+        let targetSeries = currentSeries + 1;
+        let lastSeason = 0;
+
+        videoItems.forEach(($videoItem) => {
+            if (+$videoItem.dataset.seasonIndex > lastSeason) {
+                lastSeason = +$videoItem.dataset.seasonIndex;
+            }
+        });
+
+        videoItems.forEach(($videoItem) => {
+            if (+$videoItem.dataset.seasonIndex === targetSeason && +$videoItem.dataset.seriesIndex === targetSeries) {
+                isTargetSeason = true;
+            }
+        });
+
+
+        if (isTargetSeason) {
+            return {
+                targetSeason,
+                targetSeries
+            };
+        } else if (targetSeason + 1 > lastSeason) {
+            return false;
+        } else {
+            return {
+                targetSeason: targetSeason + 1,
+                targetSeries: 0
+            };
+        }
+    }
+
+    function setNextButton() {
+        let next = calcNext();
+        $currentVideo = document.querySelector('.playlist__series__playing');
+
+        if (next) {
+            $nextButton.classList.remove(nextButtonDisabledClass);
+            $nextButton.dataset.seasonIndex = next.targetSeason;
+            $nextButton.dataset.seriesIndex = next.targetSeries;
+            $nextText.innerText = `Season ${+$currentVideo.dataset.seasonIndex+1} Series ${+$currentVideo.dataset.seriesIndex+1}`;
+        } else {
+            $nextButton.classList.add(nextButtonDisabledClass);
+            $nextText.innerText = `This is last series`;
+        }
+    }
+
+
+    let cached_played_video = [];
+    function playVideo(season, series) {
+        if (!$modal.classList.contains(modalActiveClass)) {
+            $modal.classList.add(modalActiveClass);
+            $modal.dispatchEvent(new Event('open'));
+        }
+
+        if (window.innerWidth <= mobileBreakpoint) {
+            $modal.classList.remove(openPlaylistClass);
+        }
+
+        currentSeason = season;
+        currentSeries = series;
+
+        videoItems.forEach(async ($videoItem) => {
+            $videoItem.querySelector('video').pause();
+            //$videoItem.querySelector('video').currentTime = 0;
+
+            if (+$videoItem.dataset.seasonIndex === currentSeason && +$videoItem.dataset.seriesIndex === currentSeries) {
+                document.querySelector('.vjs-fullscreen-control').addEventListener('click', () => {
+                    document.querySelector('.close').style.display = 'block'
+                })
+                $videoItem.classList.add(videoItemActiveClass);
+                $videoItem.querySelector('video').play();
+                const videoId = $videoItem.querySelector('video').id;
+                window.playPauseVideo($videoItem.querySelector('video'), currentSeason, currentSeries);
+                if(cached_played_video.indexOf(videoId) > -1){
+                    console.log('thumbnail already generated')
+                    return;
+                }else{
+                    cached_played_video.push(videoId);
+                }
+
+                const vid = videojs($videoItem.querySelector('video').id);
+
+                //check if LIVE HLS
+                if(vid.duration() === Infinity){
+                    return;
+                }
+                const generateThumbnails = async () => {
+                    console.log(vid.duration()) // log is NaN 
+                    if(vid.duration() === NaN){ generateThumbnails() }
+                    //CHECK if HLS
+                    if (vid.currentType() === 'application/x-mpegURL') {
+                        let allThumb = [];
+                        for (let i = 0; i < 3; i++) {
+                            let seconds = 0;
+                            let thumbnailsNumToGenerate = Math.round(vid.duration() / thumbnailFrame)
+                            let items = [];
+                            for (let i = 0; i < thumbnailsNumToGenerate; i++) {
+                                items.push(getHlsVideoCover(vid.currentSrc(), seconds));
+                                seconds += thumbnailFrame;
+                            }
+                            const results = await Promise.all(items).then(res => {
+                                allThumb = Object.assign({}, ...res.map((x) => (x)));
+                                vid.thumbnails(allThumb);
+                            })
+                            console.log({ ...allThumb })
+                            if (Object.keys(allThumb).length > 5) {
+                                break;
+                            }
+                        }
+                        //vid.thumbnails(allThumb);
+                        return;
+                    } else {
+                        let allThumb = [];
+                        for (let i = 0; i < 3; i++) {
+                            let seconds = 0;
+                            let thumbnailsNumToGenerate = Math.round(vid.duration() / thumbnailFrame)
+                            let items = [];
+                            for (let i = 0; i < thumbnailsNumToGenerate; i++) {
+                                items.push(getVideoCover(vid.currentSrc(), seconds));
+                                seconds += thumbnailFrame;
+                            }
+                            const results = await Promise.all(items).then(res => {
+                                allThumb = Object.assign({}, ...res.map((x) => (x)));
+                                vid.thumbnails(allThumb);
+                            })
+                            console.log({ ...allThumb })
+                            if (Object.keys(allThumb).length > 5) {
+                                break;
+                            }
+                        }
+                    }
+                }
+                generateThumbnails()
+            } else {
+                $videoItem.classList.remove(videoItemActiveClass);
+            }
+        });
+
+        document.querySelectorAll('.playlist__series-preview').forEach(($playlistSeriesItem) => {
+            const playlistSeriesSeason = +$playlistSeriesItem.dataset.seasonIndex;
+            const playlistSeriesSeries = +$playlistSeriesItem.dataset.seriesIndex;
+
+            if (playlistSeriesSeason === currentSeason && playlistSeriesSeries === currentSeries) {
+                $playlistSeriesItem.classList.add('playlist__series__playing');
+            } else {
+                $playlistSeriesItem.classList.remove('playlist__series__playing');
+            }
+        });
+
+        setNextButton();
+    }
+
+    function setPlayingClass(season, series) {
+        playlistSeries.forEach(($playlistSeriesItem) => {
+            const playlistSeriesSeason = +$playlistSeriesItem.dataset.seasonIndex;
+            const playlistSeriesSeries = +$playlistSeriesItem.dataset.seriesIndex;
+
+            if (playlistSeriesSeason === season && playlistSeriesSeries === series) {
+                $playlistSeriesItem.classList.add(playlistSeriesPlayingClass);
+            } else {
+                $playlistSeriesItem.classList.remove(playlistSeriesPlayingClass);
+            }
+        });
+    }
+
+    function playNext() {
+        if ($nextButton.classList.contains(nextButtonDisabledClass)) {
+            return;
+        }
+
+        const targetSeason = +$nextButton.dataset.seasonIndex;
+        const targetSeries = +$nextButton.dataset.seriesIndex;
+
+        if (targetSeason !== currentSeason) {
+            changeSeason(targetSeason);
+        }
+
+        playVideo(targetSeason, targetSeries);
+    }
+
+    videoThumbnails.forEach(($thumbnail) => {
+        playThumbnail($thumbnail);
+
+        $thumbnail.addEventListener('click', () => {
+            document.querySelectorAll('.playlist__series-preview').forEach(($playlistSeriesItem) => {
+                    $playlistSeriesItem.classList.remove('playlist__series__playing');
+            });
+            $thumbnail.classList.add('playlist__series__playing');
+            playVideo(+$thumbnail.dataset.seasonIndex, +$thumbnail.dataset.seriesIndex);
+        });
+    });
+
+    selects.forEach(($select) => {
+        const select = new Select({
+            $select: $select,
+        });
+
+        $select.addEventListener('change', () => {
+            if (+$select.value !== currentSeason) {
+                changeSeason(+$select.value);
+            }
+        });
+
+        $modal.addEventListener('open', () => {
+            select.checkPosition();
+        });
+
+    });
+
+    $modalClose.addEventListener('click', () => {
+        $modal.classList.remove(modalActiveClass);
+        $playlist.classList.remove(playlistOpenModal);
+
+        videoItems.forEach(($videoItem) => {
+            $videoItem.querySelector('video').pause();
+            $videoItem.querySelector('video').st();
+            //$videoItem.querySelector('video').currentTime = 0;
+        });
+
+        setPlayingClass(-1, -1);
+    });
+
+    $playlistClose.addEventListener('click', () => {
+
+        if ($modal.classList.contains(openPlaylistClass)) {
+            $modal.classList.remove(openPlaylistClass);
+
+            Array.from(document.querySelectorAll(togglePlaylistButton)).forEach(($togglePlaylistButton) => {
+                $togglePlaylistButton.classList.remove(togglePlaylistButtonActiveClass);
+            });
+        } else {
+            $modal.classList.add(openPlaylistClass);
+
+            Array.from(document.querySelectorAll(togglePlaylistButton)).forEach(($togglePlaylistButton) => {
+                $togglePlaylistButton.classList.add(togglePlaylistButtonActiveClass);
+            });
+        }
+
+
+    });
+</script>
+<script src="VideoForLifeJs.js"></script>
+</body>
+
+</html>
